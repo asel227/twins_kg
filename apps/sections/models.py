@@ -29,37 +29,6 @@ class Test(models.Model):
         verbose_name_plural = 'Тестирования'
 
 
-class Picture(models.Model):
-    image = models.ImageField(verbose_name='Изображение',
-                              upload_to=upload_instance)
-
-    class Meta:
-        verbose_name = 'Изображение'
-        verbose_name_plural = 'Изображения'
-
-    def __str__(self):
-        return f'{self.id} - image'
-
-
-class Card(models.Model):
-    name = models.CharField(verbose_name='Название', max_length=255)
-    description = models.TextField(verbose_name='Описание')
-    pictures = models.ManyToManyField(to=Picture, blank=True,
-                                      related_name='product_pictures')
-    file = models.FileField(upload_to='audios/', null=True, verbose_name="Аудио")
-
-    class Meta:
-        verbose_name = 'Карточка'
-        verbose_name_plural = 'Карточки'
-
-    def __str__(self):
-        return self.name
-
-    @property
-    def get_first_picture(self):
-        return self.pictures.first()
-
-
 class Puzzle(models.Model):
     name = models.CharField(verbose_name='Название', max_length=255)
     description = models.TextField(verbose_name='Описание')

@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'apps.users',
+    'apps.cards',
     'apps.sections',
     'apps.api',
 ]

@@ -11,7 +11,7 @@ from apps.api.serializers import (
     AuthSerializer, UsersListSerializer,
     UserDetailSerializer, UsersCreateSerializer, CardSerializer, RegisterSerializer,
 )
-from apps.sections.models import Card
+from apps.cards.models import Card
 from apps.users.models import User
 
 
@@ -74,7 +74,7 @@ class CardListCreateAPIView(ListCreateAPIView):
     serializer_class = CardSerializer
 
 
-class ProductRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+class CardRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
 

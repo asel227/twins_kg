@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer, Serializer
 
-from apps.sections.models import Card, Picture, Category
+from apps.cards.models import Card, Picture, Category
 from apps.users.models import User
 
 
