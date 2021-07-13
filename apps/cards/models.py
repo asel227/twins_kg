@@ -46,6 +46,7 @@ class Card(models.Model):
                                  null=True)
     pictures = models.ManyToManyField(to=Picture, blank=True,
                                       related_name='cards_pictures')
+
     file = models.FileField(upload_to='audios/', null=True, verbose_name="Аудио")
 
     class Meta:

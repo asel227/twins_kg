@@ -1,4 +1,4 @@
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.authtoken.models import Token
 from rest_framework.generics import (
     ListCreateAPIView, RetrieveUpdateDestroyAPIView,
@@ -37,7 +37,7 @@ class UserAuthView(APIView):
                 status=status.HTTP_404_NOT_FOUND,
             )
 
-        user_token, created = Token.objects.get_or_create(user=user)
+        user_token, created = Token.objects.get_or_create(user=user).first()
 
         return Response(data={'token': user_token.key}, status=status.HTTP_200_OK)
 
@@ -79,11 +79,7 @@ class CardRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = CardSerializer
 
 
-class ExampleAPI(APIView):
-
-    def post(self, request, *args, **kwargs):
-        serializer = RegisterSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response({'detail': 'success'}, status=200)
+class RegisterAPIView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer

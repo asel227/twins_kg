@@ -28,7 +28,7 @@ class ExerciseAdmin(admin.ModelAdmin):
 class TimeTableItemInline(admin.TabularInline):
     model = models.TimeTableItem
     raw_id_fields = ['subject']
-    extra = 1
+    extra = 3
 
 
 @admin.register(models.TimeTable)

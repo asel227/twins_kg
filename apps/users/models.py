@@ -17,18 +17,18 @@ class UserManager(BaseUserManager):
         This is a manager for Account class
     """
 
-    def create_user(self, email, password=None):
-        if not email:
-            raise ValueError("Users must have an Email address")
+    def create_user(self, phone_number, password=None):
+        if not phone_number:
+            raise ValueError("Users must have an phone_number")
 
-        user = self.model(email=self.normalize_email(email))
+        user = self.model(phone_number=phone_number)
         user.set_password(password)
         user.save(using=self._db)
 
         return user
 
-    def create_superuser(self, email, password):
-        user = self.create_user(email=self.normalize_email(email),
+    def create_superuser(self, phone_number, password):
+        user = self.create_user(phone_number=phone_number,
                                 password=password)
 
         user.is_staff = True
@@ -50,7 +50,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     age = models.CharField(verbose_name='Дата рождения', max_length=20)
     gender = models.CharField(verbose_name='Пол', max_length=20, choices=GENDER_CHOICES)
     phone_number = models.CharField(verbose_name='Номер телефона', max_length=60, unique=True)
-    email = models.EmailField(verbose_name='Почта', max_length=60, unique=True)
     date_joined = models.DateTimeField(verbose_name='Дата/время регистрации',
                                        auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='Последний вход',
@@ -59,7 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
@@ -69,4 +68,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return self.email
+        return self.phone_number
