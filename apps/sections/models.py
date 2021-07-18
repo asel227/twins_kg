@@ -14,21 +14,6 @@ class Category(models.Model):
         return self.name
 
 
-class Test(models.Model):
-    first_name = models.CharField(verbose_name='Имя', max_length=255)
-    last_name = models.CharField(verbose_name='Фамилия', max_length=255)
-    middle_name = models.CharField(verbose_name='Отчество',
-                                   max_length=255,
-                                   blank=True)
-    age = models.CharField(verbose_name='Дата рождения', max_length=20)
-    gender = models.CharField(verbose_name='Пол', max_length=20)
-    results = models.CharField(verbose_name='Результаты', max_length=20)
-
-    class Meta:
-        verbose_name = 'Тестирование'
-        verbose_name_plural = 'Тестирования'
-
-
 class Puzzle(models.Model):
     name = models.CharField(verbose_name='Название', max_length=255)
     description = models.TextField(verbose_name='Описание')

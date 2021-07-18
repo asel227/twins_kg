@@ -1,18 +1,12 @@
 from django.contrib import admin
 
 from apps.sections import models
-from apps.sections.models import Test, Puzzle, Exercise, Category, TimeTable
+from apps.sections.models import Puzzle, Exercise, Category, TimeTable
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
-
-
-@admin.register(Test)
-class TestAdmin(admin.ModelAdmin):
-    list_display = ['last_name', 'first_name', 'middle_name', 'age',
-                    'gender', 'results']
 
 
 @admin.register(Puzzle)

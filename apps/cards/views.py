@@ -23,13 +23,6 @@ class CardView(View):
         if cards is None:
             return JsonResponse({'detail': 'error'}, status=404)
 
-
-# from rest_framework import status
-# from rest_framework.parsers import FileUploadParser
-# from rest_framework.response import Response
-# from rest_framework.views import APIView
-#
-#
 # class FileUploadView(APIView):
 #     parser_classes = (FileUploadParser, )
 #

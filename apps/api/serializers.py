@@ -4,6 +4,8 @@ from rest_framework.serializers import ModelSerializer, Serializer
 from rest_framework.validators import UniqueValidator
 
 from apps.cards.models import Card, Picture, Category
+from apps.sections.models import TimeTableItem
+from apps.tests.models import Test
 from apps.users.models import User
 
 
@@ -19,58 +21,6 @@ class UsersListSerializer(ModelSerializer):
             'id', 'first_name', 'last_name', 'middle_name', 'age',
             'gender', 'phone_number', 'is_active',
         )
-
-
-class UsersCreateSerializer(ModelSerializer):
-    class Meta:
-        model = User
-        fields = (
-            'id', 'first_name', 'last_name', 'middle_name',
-            'age', 'gender', 'phone_number',
-            'is_active', 'password'
-        )
-
-
-class UserDetailSerializer(ModelSerializer):
-    class Meta:
-        model = User
-        fields = (
-            'id', 'first_name', 'last_name', 'middle_name',
-            'age', 'gender', 'phone_number',
-        )
-
-
-class CategorySerializer(ModelSerializer):
-    class Meta:
-        model = Category
-        fields = '__all__'
-
-
-class PictureSerializer(ModelSerializer):
-    class Meta:
-        model = Picture
-        fields = '__all__'
-
-
-# class ImagesClienteSerializer(serializers.HyperlinkedModelSerializer):
-#     # id_cliente_cliente = ClienteSerializer()
-#     class Meta:
-#         model = ImagesCliente
-#         fields = ('id', 'image', 'url')
-
-
-class CardSerializer(ModelSerializer):
-    card_id = serializers.PrimaryKeyRelatedField(
-        source='category',
-        queryset=Category.objects.all()
-    )
-    category = CategorySerializer(read_only=True)
-    pictures = PictureSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = Card
-        fields = ('id', 'name', 'description', 'card_id',
-                  'category', 'pictures', 'file')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -107,3 +57,47 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+class CategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+
+class PictureSerializer(ModelSerializer):
+    class Meta:
+        model = Picture
+        fields = '__all__'
+
+
+# class AudioSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Audio
+#         fields = "__all__"
+
+
+class CardSerializer(ModelSerializer):
+    card_id = serializers.PrimaryKeyRelatedField(
+        source='category',
+        queryset=Category.objects.all()
+    )
+    category = CategorySerializer(read_only=True)
+    pictures = PictureSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Card
+        fields = ('id', 'name', 'description', 'card_id',
+                  'category', 'pictures', 'file')
+
+
+class TestSerializer(ModelSerializer):
+    class Meta:
+        model = Test
+        fields = '__all__'
+
+
+class TimeTableSerializer(ModelSerializer):
+    class Meta:
+        model = TimeTableItem
+        fields = '__all__'

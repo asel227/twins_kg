@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 from utils.uploads import upload_instance
@@ -27,14 +29,15 @@ class Picture(models.Model):
 
 
 class Audio(models.Model):
-    audio = models.FileField(verbose_name='Озвучка', upload_to=upload_instance)
+    file = models.FileField(verbose_name='Озвучка', blank=False, null=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     class Meta:
         verbose_name = 'Аудио'
         verbose_name_plural = 'Аудио'
 
     def __str__(self):
-        return f'{self.id} - audio'
+        return self.file.name
 
 
 class Card(models.Model):

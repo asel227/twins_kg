@@ -15,7 +15,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Audio)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['audio']
+    list_display = ['file', 'id']
 
 
 @admin.register(Card)
