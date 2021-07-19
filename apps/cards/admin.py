@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.cards.models import Category, Picture, Audio, Card
+from apps.cards.models import Category, Audio, Card, Picture
 
 
 @admin.register(Category)
@@ -21,3 +21,4 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
     list_display = ['name', 'description', 'category', 'file']
+    # filter_horizontal = ['picture']

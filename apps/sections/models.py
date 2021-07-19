@@ -29,6 +29,19 @@ class Puzzle(models.Model):
         return self.name
 
 
+class Logopedic(models.Model):
+    name = models.CharField(verbose_name='Название', max_length=255)
+    description = models.TextField(verbose_name='Описание')
+    file = models.FileField(upload_to='audio/', null=True, verbose_name="Аудио")
+
+    class Meta:
+        verbose_name = 'Логопедия'
+        verbose_name_plural = 'Логопедия'
+
+    def __str__(self):
+        return self.name
+
+
 class Exercise(models.Model):
     name = models.CharField(verbose_name='Название', max_length=255)
     description = models.TextField(verbose_name='Описание')

@@ -23,28 +23,7 @@ class CardView(View):
         if cards is None:
             return JsonResponse({'detail': 'error'}, status=404)
 
-# class FileUploadView(APIView):
-#     parser_classes = (FileUploadParser, )
-#
-#     def post(self, request, format='jpg'):
-#         up_file = request.FILES['file']
-#         destination = open('/Users/Username/' + up_file.name, 'wb+')
-#         for chunk in up_file.chunks():
-#             destination.write(chunk)
-#         destination.close()  # File should be closed only after all chuns are added
-#
-#         return Response(up_file.name, status.HTTP_201_CREATED)
 
-
-# from rest_framework import status
-# from rest_framework.response import Response
-# from rest_framework.views import APIView
-#
-# from apps.api.serializers import ImagesClienteSerializer
-# from apps.cards.models import ImagesCliente
-#
-#
-# class PhotoListView(APIView):
 #
 #     def get(self, request, format=None):
 #         photo = ImagesCliente.objects.all()

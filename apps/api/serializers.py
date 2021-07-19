@@ -3,8 +3,8 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer, Serializer
 from rest_framework.validators import UniqueValidator
 
-from apps.cards.models import Card, Picture, Category
-from apps.sections.models import TimeTableItem
+from apps.cards.models import Card, Picture, Category, Audio
+from apps.sections.models import TimeTableItem, Logopedic
 from apps.tests.models import Test
 from apps.users.models import User
 
@@ -20,6 +20,26 @@ class UsersListSerializer(ModelSerializer):
         fields = (
             'id', 'first_name', 'last_name', 'middle_name', 'age',
             'gender', 'phone_number', 'is_active',
+        )
+
+
+class UsersCreateSerializer(ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = (
+            'id', 'first_name', 'last_name', 'middle_name', 'age',
+            'gender', 'phone_number', 'is_active', 'password'
+        )
+
+
+class UserDetailSerializer(ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = (
+            'id', 'first_name', 'last_name', 'middle_name', 'age',
+            'gender', 'phone_number'
         )
 
 
@@ -71,10 +91,10 @@ class PictureSerializer(ModelSerializer):
         fields = '__all__'
 
 
-# class AudioSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Audio
-#         fields = "__all__"
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Audio
+        fields = ['file']
 
 
 class CardSerializer(ModelSerializer):
@@ -91,6 +111,16 @@ class CardSerializer(ModelSerializer):
                   'category', 'pictures', 'file')
 
 
+class CardDetailSerializer(ModelSerializer):
+
+    class Meta:
+        model = Card
+        fields = (
+            'id', 'name', 'description', 'card_id',
+            'category', 'pictures', 'file'
+        )
+
+
 class TestSerializer(ModelSerializer):
     class Meta:
         model = Test
@@ -100,4 +130,10 @@ class TestSerializer(ModelSerializer):
 class TimeTableSerializer(ModelSerializer):
     class Meta:
         model = TimeTableItem
+        fields = '__all__'
+
+
+class LogopedicSerializer(ModelSerializer):
+    class Meta:
+        model = Logopedic
         fields = '__all__'

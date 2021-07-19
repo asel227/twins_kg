@@ -17,8 +17,7 @@ class Category(models.Model):
 
 
 class Picture(models.Model):
-    image = models.ImageField(verbose_name='Изображение',
-                              upload_to=upload_instance)
+    image = models.ImageField(verbose_name='Изображение', upload_to=upload_instance)
 
     class Meta:
         verbose_name = 'Изображение'
@@ -29,7 +28,7 @@ class Picture(models.Model):
 
 
 class Audio(models.Model):
-    file = models.FileField(verbose_name='Озвучка', blank=False, null=True)
+    file = models.FileField(verbose_name='Озвучка', upload_to=upload_instance)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     class Meta:
@@ -47,10 +46,8 @@ class Card(models.Model):
                                  on_delete=models.SET_NULL,
                                  related_name='cards',
                                  null=True)
-    pictures = models.ManyToManyField(to=Picture, blank=True,
-                                      related_name='cards_pictures')
-
-    file = models.FileField(upload_to='audios/', null=True, verbose_name="Аудио")
+    pictures = models.ManyToManyField(to=Picture, blank=True, related_name='cards_pictures')
+    file = models.FileField(upload_to=upload_instance, null=True, verbose_name="Аудио")
 
     class Meta:
         verbose_name = 'Карточка'

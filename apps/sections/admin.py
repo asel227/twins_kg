@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from apps.sections import models
-from apps.sections.models import Puzzle, Exercise, Category, TimeTable
+from apps.sections.models import Puzzle, Exercise, Category, TimeTable, Logopedic
 
 
 @admin.register(Category)
@@ -12,6 +12,11 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Puzzle)
 class PuzzleAdmin(admin.ModelAdmin):
     list_display = ['name', 'description', 'image']
+
+
+@admin.register(Logopedic)
+class LogopedicAdmin(admin.ModelAdmin):
+    list_display = ['name', 'description', 'file']
 
 
 @admin.register(Exercise)
