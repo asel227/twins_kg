@@ -2,7 +2,10 @@ import json
 
 from django.http import JsonResponse
 from django.views import View
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated
 
+from apps.users.serializers import CardSerializer, CardDetailSerializer
 from apps.cards.models import Card
 
 
@@ -24,53 +27,32 @@ class CardView(View):
             return JsonResponse({'detail': 'error'}, status=404)
 
 
+class CardListCreateAPIView(ListCreateAPIView):
+    queryset = Card.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = CardSerializer
+
+
+class CardRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Card.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = CardDetailSerializer
+
+
+class CardCreateAPIView(ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Card.objects.all()
+    serializer_class = CardSerializer
+
+
+# class FileUploadView(APIView):
+#     permission_classes = [IsAuthenticated, ]
+#     parser_class = (FileUploadParser,)
 #
-#     def get(self, request, format=None):
-#         photo = ImagesCliente.objects.all()
-#         serializer = ImagesClienteSerializer(photo, many=True)
-#         return Response(data=serializer.data, status=status.HTTP_200_OK)
-#
-#     def post(self, request, format=None):
-#         serializer = ImagesClienteSerializer(data=request.data, context={'request': request})
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#
-# class PhotoDetailView(APIView):
-#
-#     def get_object(self, pk):
-#         try:
-#             return ImagesCliente.objects.get(pk=pk)
-#         except:
-#             return Response(
-#                 data={'error': 'Фотография не найдена'},
-#                 status=status.HTTP_404_NOT_FOUND,
-#             )
-#
-#     def get(self, request, pk, format=None):
-#         photo = self.get_object(pk)
-#         serializer = ImagesClienteSerializer(photo, context={'request': request})
-#         return Response(data=serializer.data, status=status.HTTP_200_OK)
-#
-#     def post(self, request, format=None):
-#         serializer = ImagesClienteSerializer(data=request.data, files=request.FILES)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#     def post(self, request, *args, **kwargs):
+#         file_serializer = FileSerializer(data=request.data)
+#         if file_serializer.is_valid():
+#             file_serializer.save()
+#             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
 #         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#     def delete(self, request, pk, format=None):
-#         photo = self.get_object(pk)
-#         photo.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
-#
-#     def put(self, request, pk, format=None):
-#         photo = self.get_object(pk)
-#         serializer = ImagesClienteSerializer(photo, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.status.HTTP_400_BAD_REQUEST)
+#             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

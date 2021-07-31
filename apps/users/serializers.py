@@ -3,9 +3,9 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer, Serializer
 from rest_framework.validators import UniqueValidator
 
-from apps.cards.models import Card, Picture, Category, Audio
-from apps.sections.models import TimeTableItem, Logopedic
-from apps.tests.models import Test
+from apps.cards.models import Card, Category, Audio
+from apps.sections.models import TimeTableItem, Logopedic, Exercise
+from apps.tests.models import Test, ResultTests
 from apps.users.models import User
 
 
@@ -24,7 +24,6 @@ class UsersListSerializer(ModelSerializer):
 
 
 class UsersCreateSerializer(ModelSerializer):
-
     class Meta:
         model = User
         fields = (
@@ -34,7 +33,6 @@ class UsersCreateSerializer(ModelSerializer):
 
 
 class UserDetailSerializer(ModelSerializer):
-
     class Meta:
         model = User
         fields = (
@@ -85,12 +83,6 @@ class CategorySerializer(ModelSerializer):
         fields = '__all__'
 
 
-class PictureSerializer(ModelSerializer):
-    class Meta:
-        model = Picture
-        fields = '__all__'
-
-
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audio
@@ -103,16 +95,24 @@ class CardSerializer(ModelSerializer):
         queryset=Category.objects.all()
     )
     category = CategorySerializer(read_only=True)
-    pictures = PictureSerializer(read_only=True, many=True)
 
     class Meta:
         model = Card
         fields = ('id', 'name', 'description', 'card_id',
                   'category', 'pictures', 'file')
 
+    # def create(self, validated_data):
+    #     pictures = validated_data.pop('pictures')
+    #     print(pictures)
+    #     card = Card.objects.create(**validated_data)
+    #     print(pictures)
+    #     for picture in pictures:
+    #         card.pictures.add(picture)
+    #
+    #     return card
+
 
 class CardDetailSerializer(ModelSerializer):
-
     class Meta:
         model = Card
         fields = (
@@ -127,6 +127,12 @@ class TestSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class ResultTestsSerializer(ModelSerializer):
+    class Meta:
+        model = ResultTests
+        fields = '__all__'
+
+
 class TimeTableSerializer(ModelSerializer):
     class Meta:
         model = TimeTableItem
@@ -136,4 +142,10 @@ class TimeTableSerializer(ModelSerializer):
 class LogopedicSerializer(ModelSerializer):
     class Meta:
         model = Logopedic
+        fields = '__all__'
+
+
+class ExerciseSerializer(ModelSerializer):
+    class Meta:
+        model = Exercise
         fields = '__all__'

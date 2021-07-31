@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.cards',
     'apps.sections',
-    'apps.api',
     'apps.tests',
 ]
 
