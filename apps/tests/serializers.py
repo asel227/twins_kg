@@ -1,6 +1,7 @@
+from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
-from apps.tests.models import Test, ResultTests
+from apps.tests.models import Test, Results, Answer
 
 
 class TestSerializer(ModelSerializer):
@@ -9,7 +10,15 @@ class TestSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class ResultTestsSerializer(ModelSerializer):
+class AnswerSerializer(ModelSerializer):
+    questions = TestSerializer(read_only=True)
+
     class Meta:
-        model = ResultTests
+        model = Answer
+        fields = '__all__'
+
+
+class ResultsSerializer(ModelSerializer):
+    class Meta:
+        model = Results
         fields = '__all__'
