@@ -1,24 +1,14 @@
-from django.contrib import admin
+import django.contrib
 
-from apps.cards.models import Category, Audio, Card
+from apps.cards.models import Category, Card
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+@django.contrib.admin.register(Category)
+class CategoryAdmin(django.contrib.admin.ModelAdmin):
     list_display = ['name']
 
 
-# @admin.register(Picture)
-# class PictureAdmin(admin.ModelAdmin):
-#     list_display = ['image']
-
-
-@admin.register(Audio)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['file', 'id']
-
-
-@admin.register(Card)
-class CardAdmin(admin.ModelAdmin):
+@django.contrib.admin.register(Card)
+class CardAdmin(django.contrib.admin.ModelAdmin):
     list_display = ['name', 'description', 'category', 'pictures', 'file']
     # filter_horizontal = ['picture']

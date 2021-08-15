@@ -1,5 +1,3 @@
-import uuid
-
 from django.db import models
 
 from utils.uploads import upload_instance
@@ -14,29 +12,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
-#
-# class Picture(models.Model):
-#     image = models.ImageField(verbose_name='Изображение', upload_to=upload_instance)
-#
-#     class Meta:
-#         verbose_name = 'Изображение'
-#         verbose_name_plural = 'Изображения'
-#
-#     def __str__(self):
-#         return f'{self.id} - image'
-
-
-class Audio(models.Model):
-    file = models.FileField(verbose_name='Озвучка', upload_to=upload_instance)
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
-    class Meta:
-        verbose_name = 'Аудио'
-        verbose_name_plural = 'Аудио'
-
-    def __str__(self):
-        return self.file.name
 
 
 class Card(models.Model):

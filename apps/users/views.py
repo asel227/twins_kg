@@ -1,6 +1,6 @@
 from rest_framework import status, generics
 from rest_framework.authtoken.models import Token
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -39,8 +39,8 @@ class UserAuthView(APIView):
         return Response(data={'token': user_token.key}, status=status.HTTP_200_OK)
 
 
-class UsersListAPIView(ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
+class UsersListAPIView(ListAPIView):
+    permission_classes = (AllowAny,)
     serializer_class = UsersListSerializer
     queryset = User.objects.filter(is_active=True)
 
