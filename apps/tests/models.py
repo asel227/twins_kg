@@ -4,7 +4,7 @@ from apps.users.models import User
 
 
 class Test(models.Model):
-    name = models.CharField(verbose_name='Название', max_length=255)
+    # name = models.CharField(verbose_name='Название', max_length=255)
     description = models.CharField(verbose_name='Описание', max_length=255)
     question = models.CharField(verbose_name='Текст вопроса', max_length=200)
 

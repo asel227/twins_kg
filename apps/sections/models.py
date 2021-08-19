@@ -32,6 +32,7 @@ class Puzzle(models.Model):
 class Logopedic(models.Model):
     name = models.CharField(verbose_name='Название', max_length=255)
     description = models.TextField(verbose_name='Описание')
+    pictures = models.ImageField(verbose_name='Картинки', upload_to=upload_instance)
     file = models.FileField(upload_to='audio/', null=True, verbose_name="Аудио")
 
     class Meta:

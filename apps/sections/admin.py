@@ -16,7 +16,7 @@ class PuzzleAdmin(admin.ModelAdmin):
 
 @admin.register(Logopedic)
 class LogopedicAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description', 'file']
+    list_display = ['name', 'description', 'pictures', 'file']
 
 
 @admin.register(Exercise)
